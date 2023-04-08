@@ -15,6 +15,7 @@ const MainPage = () => {
         <li>Job 3</li>
       </ul>
       </div>
+      <Button type="submit" className='login-btn'> Login out</Button>
     </div>
   );
 }
