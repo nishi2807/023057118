@@ -48,8 +48,8 @@ const LoginPage = () => {
               required
             />
           </Form.Group>
-          <Button type="submit" className='login-btn'> Login</Button>
-          <Button type="submit" className='login-btn'> Google</Button>
+          <button type="submit" className='login-btn'> Login</button>
+          <button type="submit" className='login-btn'> Google</button>
           <div className='signup-bottom-text'>
             <p>
               Don't have an account? <Link to="/signup">Signup here</Link>
