@@ -52,7 +52,7 @@ const LoginPage = () => {
           <Button type="submit" className='login-btn'> Google</Button>
           <div className='signup-bottom-text'>
             <p>
-              Don't have an account? <Link to="/">Signup here</Link>
+              Don't have an account? <Link to="/signup">Signup here</Link>
             </p>
           </div>
         </Form>
