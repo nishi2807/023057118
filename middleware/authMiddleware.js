@@ -29,7 +29,7 @@ const checkUser = (req, res, next) => {
         jwt.verify(token, 'new user in job portal', async (err, decodeToken) => {
             if (err) {
                 console.log(err.message);
-                
+
                 next();
             }
             else {

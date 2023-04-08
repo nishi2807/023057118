@@ -8,12 +8,12 @@ const handleErrors = (err) => {
     let errors = { email: '', password: '' };
 
     //incorrect email
-    if (err.message === 'Incorrect Email !'){
+    if (err.message === 'Incorrect Email !') {
         errors.email = 'That email is not registered';
     }
 
     //incorrect password
-    if (err.message === 'Incorrect Password !'){
+    if (err.message === 'Incorrect Password !') {
         errors.password = 'Password is incorrect';
     }
 
@@ -70,6 +70,7 @@ module.exports.login_post = async (req, res) => {
     // res.send('user login');
     try {
         const user = await User.login(email, password);
+        console.log('user confirmed!')
         res.status(200).json({ user: user._id });
     } catch (err) {
         const errors = handleErrors(err);
@@ -78,6 +79,6 @@ module.exports.login_post = async (req, res) => {
 }
 
 module.exports.logout_get = async (req, res) => {
-    res.cookie('jwt', '', {maxAge: 1});
+    res.cookie('jwt', '', { maxAge: 1 });
     res.redirect('/');
 }

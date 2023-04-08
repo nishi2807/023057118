@@ -1,20 +1,26 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 // const mongodb = require('mongodb').MongoClient;
 const app = express();
+const cors = require('cors');
+const axios = require('axios');
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 // mongodb.connect('mongodb://localhost:27017/Job_portal')
 
 // app.use(express.static('public'))
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 app.use(express.json());
 
-const dbUrl = "mongodb+srv://nishi:nishi123@cluster0.rybzfdd.mongodb.net/JobPortal"
+const dbUrl = "mongodb://localhost/JobPortal"
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => app.listen(9000), console.log('connected'))
     .catch((err) => console.log(err));
+
+const frontUri = `http://localhost:3000/`
+app.use(cors({ origin: frontUri, credentials: true }))
 
 app.listen(8080);
 app.get('*', checkUser);
@@ -34,4 +40,4 @@ app.get('/read-cookies', (req, res) => {
     const cookies = req.cookies;
     console.log(cookies);
     res.json(cookies);
-});
+})

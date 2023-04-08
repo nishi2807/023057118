@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+// import axios from 'axios';
 import './Login.css'
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add login logic here
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      console.log(data); // assuming the server returns JSON data
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -38,6 +49,7 @@ const LoginPage = () => {
             />
           </Form.Group>
           <Button type="submit" className='login-btn'> Login</Button>
+          <Button type="submit" className='login-btn'> Google</Button>
           <div className='signup-bottom-text'>
             <p>
               Don't have an account? <Link to="/">Signup here</Link>
