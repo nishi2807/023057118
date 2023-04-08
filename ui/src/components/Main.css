@@ -1,0 +1,23 @@
+.main-main-container{
+    width: 100%;
+    height: 100vh;
+    background-image: url('project-1.png');
+    background-position: center;
+    background-size: cover;
+    padding: 110px 500px;
+  }
+
+  .main-title{
+    color: green;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 900;
+    margin-bottom: 20px;
+    display: flex;
+  }
+
+.main-subheading{
+    color: green;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    margin-top: 20px;
+}
