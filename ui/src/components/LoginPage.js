@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 // import axios from 'axios';
 import './Login.css'
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,9 +18,15 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      console.log(data); // assuming the server returns JSON data
-    } catch (err) {
-      console.error(err);
+    console.log(data.success)
+    if(data.success){
+      navigate('/mainpage');
+    }
+  } catch (err) {
+    if(err.message === "Incorrect Email!" || err.message === "Incorrect Passowrd!"){
+    console.error(err);}else{
+      console.error("hello")
+    }
     }
   };
 

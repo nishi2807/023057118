@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import ReactDOM from 'react-dom'
 import Button from 'react-bootstrap/Button';
 import { BrowserRouter as Router,Switch,Route, BrowserRouter, Routes } from 'react-router-dom';
+import MainPage from './components/MainPage';
+
+
 
 function App() {
   return (
@@ -13,6 +16,7 @@ function App() {
        <Routes>
         <Route path="/" element={<LoginPage/>}></Route>
         <Route path="/signup" element={<SignupPage/>}></Route>
+        <Route path="/mainpage" element={<MainPage/>}></Route>
        </Routes>
        </BrowserRouter>
       </div>

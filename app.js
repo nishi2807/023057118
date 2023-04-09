@@ -19,8 +19,8 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => app.listen(9000), console.log('connected'))
     .catch((err) => console.log(err));
 
-const frontUri = `http://localhost:3000/`
-app.use(cors({ origin: frontUri, credentials: true }))
+// const frontUri = `http://localhost:3000/`
+// app.use(cors({ origin: frontUri, credentials: true }))
 
 app.listen(8080);
 app.get('*', checkUser);

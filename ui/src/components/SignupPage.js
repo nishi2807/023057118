@@ -5,8 +5,8 @@ import './Signup.css';
 import background from './project-1.png';
 const SignupPage = () => {
     // const [name, setName] = useState('');
-    const [email, setEmail] = useState({ email: "" });
-    const [password, setPassword] = useState({ password: "" });
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     // const [user, setUser] = useState({
     //     email: "", password: ""
