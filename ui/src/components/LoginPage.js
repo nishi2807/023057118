@@ -30,11 +30,25 @@ const LoginPage = () => {
     }
   };
 
+  const handleGoogleAuth = () => {
+    fetch('/google', {
+      method: 'GET',
+      credentials: 'include' // Include cookies in the request
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.url) {
+        window.location.replace(data.url); // Redirect to the Google authentication URL
+      }
+    })
+    .catch(err => console.error(err));
+  };
+
   return (
     <div className="login-main-container">
       <div className="login-blur-container">
         <h1 className="login-title">Login</h1>
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label id='login-subheading'>Email address</Form.Label>
             <Form.Control
@@ -42,7 +56,6 @@ const LoginPage = () => {
               placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
           </Form.Group>
 
@@ -53,11 +66,10 @@ const LoginPage = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
           </Form.Group>
-          <button type="submit" className='login-btn'> Login</button>
-          <button type="submit" className='login-btn'> Google</button>
+          <button type="submit" className='login-btn' onClick={handleSubmit}> Login</button>
+          <button  className='login-btn' onClick={handleGoogleAuth}> Google</button>
           <div className='signup-bottom-text'>
             <p>
               Don't have an account? <Link to="/signup">Signup here</Link>
