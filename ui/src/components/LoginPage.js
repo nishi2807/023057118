@@ -7,6 +7,7 @@ import { gapi } from "gapi-script";
 // import axios from 'axios';
 import './Login.css'
 import GoogleBtn from './googlebtn';
+import { data } from './const';
 
 const CLIENT_ID = "3584ebcb02e8bbe0ba8b";
 const CLIENTG_ID = "244873686234-vtvor8q41b9eoe6vu3sdk3cjcer506c2.apps.googleusercontent.com"
@@ -45,9 +46,10 @@ const LoginPage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-      const data = await response.json();
-      console.log(data.success)
-      if (data.success) {
+      const datas = await response.json();
+      console.log(datas.success)
+      if (datas.success) {
+        data.user = datas.email
         navigate('/mainpage');
       }
     } catch (err) {
@@ -73,9 +75,9 @@ const LoginPage = () => {
   //     credentials: 'include' // Include cookies in the request
   //   })
   //   .then(res => res.json())
-  //   .then(data => {
-  //     if (data.url) {
-  //       window.location.replace(data.url); // Redirect to the Google authentication URL
+  //   .then(datas => {
+  //     if (datas.url) {
+  //       window.location.replace(datas.url); // Redirect to the Google authentication URL
   //     }
   //   })
   //   .catch(err => console.error(err));
@@ -122,7 +124,7 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-            <div className='login-fp'>Forget Passowrd?</div>
+            <div className='login-fp'>Forgot Password?</div>
           </Form>
           <div className='login-btm'>
             <button type="submit" className='login-butn' onClick={handleSubmit}> Login</button>

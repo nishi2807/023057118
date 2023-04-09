@@ -1,6 +1,7 @@
 import React from 'react';
 import { GoogleLogout } from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
+import { data } from './const';
 
 const clientId = "244873686234-vtvor8q41b9eoe6vu3sdk3cjcer506c2.apps.googleusercontent.com"
 
@@ -10,6 +11,7 @@ function GoogleLogOutBtn() {
     const onSuccess = () => {
         console.log("Logout Scuccessfull");
         navigate("/")
+        data.user = ""
     }
 
     const renderButton = ({ onClick, disabled }) => (
@@ -18,7 +20,7 @@ function GoogleLogOutBtn() {
             disabled={disabled}
             className='LogOut-btn'
         >
-            <span>SignOut</span>
+            <span>LogOut</span>
         </button>
     );
 

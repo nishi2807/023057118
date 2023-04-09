@@ -1,8 +1,11 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
+import { gapi } from 'gapi-script';
+import { data } from './const';
 
 const clientgId = "244873686234-vtvor8q41b9eoe6vu3sdk3cjcer506c2.apps.googleusercontent.com"
+
 
 function GoogleBtn() {
     const navigate = useNavigate();
@@ -10,6 +13,7 @@ function GoogleBtn() {
     const onSuccess = (res) => {
         console.log("Login Scuccess! Current User : ", res.profileObj);
         navigate("/mainpage")
+        data.user = res.profileObj.email
     }
 
     const onFailure = (res) => {

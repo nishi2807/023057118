@@ -72,7 +72,7 @@ module.exports.login_post = async (req, res) => {
         const user = await User.login(email, password);
         console.log('user confirmed!')
         // res.status(200).json({ user: user._id });
-        res.status(200).json({ success: true });
+        res.status(200).json({ success: true, email:email });
         // res.render("/mainpage")
 
     } catch (err) {
