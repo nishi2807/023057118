@@ -68,11 +68,15 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-          <button type="submit" className='login-btn' onClick={handleSubmit}> Login</button>
-          <button  className='login-btn' onClick={handleGoogleAuth}> Google</button>
+          <button type="submit" className='login-btn'> Login</button>
+          <button type="submit" className='login-btn'> Google</button>
           <div className='signup-bottom-text'>
             <p>
               Don't have an account? <Link to="/signup">Signup here</Link>
+              <p>
+              Don't remember your password? <Link to="/">Reset password</Link>
+            </p>
+  
             </p>
           </div>
         </Form>
