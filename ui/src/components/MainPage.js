@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import './Main.css'
+import GoogleLogOutBtn from './googlelogoutbtn';
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -20,7 +21,8 @@ const MainPage = () => {
         <li>Job 3</li>
       </ul>
       </div>
-      <Button type="submit" className='login-btn' onClick={handleChange}> Log Out</Button>
+      {/* <Button type="submit" className='login-btn' onClick={handleChange}> Log Out</Button> */}
+      <GoogleLogOutBtn />
     </div>
   );
 }

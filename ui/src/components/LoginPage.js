@@ -2,12 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "react-google-login";
+import { gapi } from "gapi-script";
 // import axios from 'axios';
 import './Login.css'
+import GoogleBtn from './googlebtn';
 
 const CLIENT_ID = "3584ebcb02e8bbe0ba8b";
+const CLIENTG_ID = "244873686234-vtvor8q41b9eoe6vu3sdk3cjcer506c2.apps.googleusercontent.com"
 
 const LoginPage = () => {
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: CLIENTG_ID,
+      })
+    };
+    gapi.load('client:auth2', start);
+  })
 
   function loginwithGitHub() {
     window.location.assign("https://github.com/login/oauth/authorize?client_id=" + CLIENT_ID);
@@ -120,7 +133,7 @@ const LoginPage = () => {
           <div className='login-bottom-btns'>
             <button className='btn-login' onClick={loginwithGitHub}> GitHub</button>
             <div className='login-empty'></div>
-            <button className='btn-login' >Google</button>
+            <GoogleBtn />
           </div>
           <div className='login-bottom-text'>
             <p>
