@@ -84,39 +84,52 @@ const LoginPage = () => {
   // },[]);
 
   return (
-    <div className="login-main-container">
-      <div className="login-blur-container">
-        <h1 className="login-title">Login</h1>
-        <Form>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label id='login-subheading'>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
+    <div className='login-main-con'>
+      <div className='login-bg-con'></div>
+      <div className='login-con'>
+        <div className='login-blur-container'>
+          <h1 className='login-title'>LogIn</h1>
+          <Form>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label id='login-subheading'>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label id='login-subheading'>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-        </Form>
-        <button type="submit" className='login-btn' onClick={handleSubmit}> Login</button>
-        <button className='login-btn' onClick={loginwithGitHub}> GitHub</button>
-        <div className='signup-bottom-text'>
-          <p>
-            Don't have an account? <Link to="/signup">Signup here</Link>
-          </p>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label id='login-subheading'>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <div className='login-fp'>Forget Passowrd?</div>
+          </Form>
+          <div className='login-btm'>
+            <button type="submit" className='login-butn' onClick={handleSubmit}> Login</button>
+          </div>
+          <div className='login-bottom'>
+            - Or -
+          </div>
+          <div className='login-bottom-btns'>
+            <button className='btn-login' onClick={loginwithGitHub}> GitHub</button>
+            <div className='login-empty'></div>
+            <button className='btn-login' >Google</button>
+          </div>
+          <div className='login-bottom-text'>
+            <p>
+              Don't have an account? <Link to="/signup">SignUp</Link>
+            </p>
+          </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

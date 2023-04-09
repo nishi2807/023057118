@@ -85,7 +85,7 @@ const SignupPage = () => {
                         <button type="submit" name='signup' className="signup-btn" >Sign up</button>
                             <div className='signup-bottom-text'>
                             <p>
-                                Already have an account? <Link to="/">Login here</Link>
+                                Already have an account? <Link to="/">LogIn</Link>
                             </p>
                             </div>
                         </div>
