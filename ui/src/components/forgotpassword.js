@@ -6,6 +6,7 @@ function ForgotPassword() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     // Make a request to your server to reset the user's password using the user's email address
     // Display a success message or an error message
   };
