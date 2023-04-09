@@ -1,3 +1,10 @@
+// 391393770390-o5obhcggjcm747orpl4l5ode5v5kftuj.apps.googleusercontent.com
+// client id ^^
+// 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
+// client secret
+
+
+
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -30,19 +37,19 @@ const LoginPage = () => {
     }
   };
 
-  const handleGoogleAuth = () => {
-    fetch('/google', {
-      method: 'GET',
-      credentials: 'include' // Include cookies in the request
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.url) {
-        window.location.replace(data.url); // Redirect to the Google authentication URL
-      }
-    })
-    .catch(err => console.error(err));
-  };
+  // const handleGoogleAuth = () => {
+  //   fetch('/google', {
+  //     method: 'GET',
+  //     credentials: 'include' // Include cookies in the request
+  //   })
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     if (data.url) {
+  //       window.location.replace(data.url); // Redirect to the Google authentication URL
+  //     }
+  //   })
+  //   .catch(err => console.error(err));
+  // };
 
   return (
     <div className="login-main-container">
@@ -68,8 +75,8 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-          <button type="submit" className='login-btn'> Login</button>
-          <button type="submit" className='login-btn'> Google</button>
+          <button type="submit" className='login-btn' onClick={handleSubmit}> Login</button>
+          <button  className='login-btn' onClick={handleGoogleAuth}> Google</button>
           <div className='signup-bottom-text'>
             <p>
               Don't have an account? <Link to="/signup">Signup here</Link>

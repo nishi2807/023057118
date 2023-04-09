@@ -20,7 +20,7 @@ const MainPage = () => {
         <li>Job 3</li>
       </ul>
       </div>
-      <Button type="submit" className='login-btn' onClick={handleChange} > Logout</Button>
+      <Button type="submit" className='login-btn' onClick={handleChange}> Log Out</Button>
     </div>
   );
 }
