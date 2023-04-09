@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // const mongodb = require('mongodb')
 const app = express();
 const cors = require('cors');
+const session = require('express-session');
 // const axios = require('axios');
 const auth = require('./routes/auth')
 const passport = require('passport');
@@ -25,18 +26,26 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 // const frontUri = `http://localhost:3000/`
 // app.use(cors({ origin: frontUri, credentials: true }))
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true
+}));
 
-// app.use(
-//     cors({
-//         origin: "http://localhost:3000",
-//         methods: "GET,POST",
-//         credentials: true
-//     }))
+app.use(passport.initialize());
+app.use(passport.session());
+// app.use(passportSetup);
+
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+        methods: "GET,POST,PUT,DELETE",
+        credentials: true
+    }))
 
 app.listen(8080);
 app.get('*', checkUser);
+app.use('/auth', auth);
 app.use(authRoutes);
 app.use(cookieParser());
 
