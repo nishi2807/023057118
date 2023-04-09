@@ -3,77 +3,94 @@ import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Signup.css';
 import background from './project-1.png';
+import { useNavigate } from 'react-router-dom';
+
 const SignupPage = () => {
+    const navigate = useNavigate()
     // const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    // const [user, setUser] = useState({
-    //     email: "", password: ""
-    // });
-
-    // let name, value;
+    const [cpassword, setCpassword] = useState('')
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const response = await fetch('/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
+        if (password === cpassword) {
+            try {
+                const response = await fetch('/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
 
-            if (response.ok) {
-                const data = await response.json();
-                // Do something with the response data, such as setting it in state
-                console.log(data);
-            } else {
-                // Handle the error response from the server
-                console.error('Error:', response.statusText);
+                if (response.ok) {
+                    const data = await response.json();
+                    // Do something with the response data, such as setting it in state
+                    console.log(data);
+                    navigate("/mainpage")
+                } else {
+                    // Handle the error response from the server
+                    console.error('Error:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-        } catch (error) {
-            console.error('Error:', error);
+        } else {
+            console.log("Enter Password Again..")
         }
     };
 
     return (
-        <div className='signup-main-container'>
-            <div className='signup-blur-container'>
-                <h1 className='signup-title'>Sign up</h1>
-                <Form onSubmit={handleSubmit} method='POST'>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label id='signup-subheading'>Email address</Form.Label>
-                        <Form.Control
-                            type="email"
-                            name='email'
-                            placeholder="Enter email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
+        <div className='signup-main-con'>
+            <div className='signup-bg-con'></div>
+            <div className='signup-con'>
+                <div className='signup-blur-container'>
+                    <h1 className='signup-title'>SignUp</h1>
+                    <Form onSubmit={handleSubmit} method='POST'>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label id='signup-subheading'>Email address</Form.Label>
+                            <Form.Control
+                                type="email"
+                                name='email'
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label id='signup-subheading'>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            name='password'
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
-                    <button type="submit" name='signup' className="signup-btn" >Sign up</button>
-                    <div className='signup-bottom-text'>
-                        <p>
-                            Already have an account? <Link to="/">Login here</Link>
-                        </p>
-                    </div>
-                </Form>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label id='signup-subheading'>Enter Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                name='password'
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <Form.Label id='signup-subheading'>Confirm Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                name='confirmpassword'
+                                placeholder="Confirm Password"
+                                value={cpassword}
+                                onChange={(e) => setCpassword(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                        <div className='signup-bottom-con'>
+                        <button type="submit" name='signup' className="signup-btn" >Sign up</button>
+                            <div className='signup-bottom-text'>
+                            <p>
+                                Already have an account? <Link to="/">Login here</Link>
+                            </p>
+                            </div>
+                        </div>
+                    </Form>
+                </div>
             </div>
         </div>
     );
