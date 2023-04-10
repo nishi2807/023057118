@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './Signup.css';
 import background from './project-1.png';
 import { useNavigate } from 'react-router-dom';
+import { data } from './const';
 
 const SignupPage = () => {
     const navigate = useNavigate()
@@ -26,9 +27,11 @@ const SignupPage = () => {
                 });
 
                 if (response.ok) {
-                    const data = await response.json();
+                    const datas = await response.json();
                     // Do something with the response data, such as setting it in state
-                    console.log(data);
+                    data.user = email
+                    console.log(datas);
+                    
                     navigate("/mainpage")
                 } else {
                     // Handle the error response from the server
