@@ -24,15 +24,6 @@ const LoginPage = () => {
     gapi.load('client:auth2', start);
   })
 
-  // GitHub oAuth useEffect
-  useEffect(()=>{
-    const queryString = window.location.search;
-    console.log("queryString"+queryString)
-    const urlParams = new URLSearchParams(queryString);
-    console.log("urlParams"+urlParams)
-  })
-
-
   function loginwithGitHub() {
     window.location.assign("https://github.com/login/oauth/authorize?client_id=" + CLIENT_ID);
   }
