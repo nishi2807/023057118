@@ -37,7 +37,7 @@
   height: 100%;
   padding-left: 80px;
   padding-right: 80px;
-  padding-top: 50px;
+  padding-top: 15px;
   display: flex;
   flex-direction: column;
 }
@@ -46,7 +46,7 @@
   color: #0466c8;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 900;
-  margin-bottom: 8%;
+  margin-bottom: 1%;
 }
 
 #signup-subheading{
@@ -57,7 +57,7 @@
 }
 
 .signup-btn{
-  margin-top: 20px;
+  margin-top: 10px;
   height: 50px;
   width: 100%;
   background-color: #0466c8;
@@ -73,7 +73,7 @@
 }
 
 .signup-bottom-con{
-  margin-top: 15%;
+  margin-top: 5%;
 }
 
 .signup-bottom-text{

@@ -8,8 +8,9 @@ import { gapi } from "gapi-script";
 import './Login.css'
 import GoogleBtn from './googlebtn';
 import { data } from './const';
+import GitHubBtn from './github';
 
-const CLIENT_ID = "3584ebcb02e8bbe0ba8b";
+// const CLIENT_ID = "3584ebcb02e8bbe0ba8b";
 const CLIENTG_ID = "244873686234-vtvor8q41b9eoe6vu3sdk3cjcer506c2.apps.googleusercontent.com"
 
 const LoginPage = () => {
@@ -24,16 +25,16 @@ const LoginPage = () => {
     gapi.load('client:auth2', start);
   })
 
-  function loginwithGitHub() {
-    window.location.assign("https://github.com/login/oauth/authorize?client_id=" + CLIENT_ID);
-  }
+  // function loginwithGitHub() {
+  //   window.location.assign("https://github.com/login/oauth/authorize?client_id=" + CLIENT_ID);
+  // }
 
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const codeParam = urlParams.get("code");
-    console.log(codeParam);
-  }, []);
+  // useEffect(() => {
+  //   const queryString = window.location.search;
+  //   const urlParams = new URLSearchParams(queryString);
+  //   const codeParam = urlParams.get("code");
+  //   console.log(codeParam);
+  // }, []);
 
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -62,42 +63,6 @@ const LoginPage = () => {
     }
   };
 
-  // const google = () => {
-  //   window.open("http://localhost:3000/auth/google", "_self");
-  // };
-
-  // const github = () => {
-  //   window.open("http://localhost:3000/auth/github", "_self");
-  // };
-
-  // const handleGoogleAuth = () => {
-  //   fetch('/google', {
-  //     method: 'GET',
-  //     credentials: 'include' // Include cookies in the request
-  //   })
-  //   .then(res => res.json())
-  //   .then(datas => {
-  //     if (datas.url) {
-  //       window.location.replace(datas.url); // Redirect to the Google authentication URL
-  //     }
-  //   })
-  //   .catch(err => console.error(err));
-  // };
-  // function handleCallbackResponse(response){
-  //   console.log("Encoded JWT"+response.credential);
-  // }
-
-  // useEffect(()=>{
-  //   /* global google */
-  //   google.accounts.id.initialize({
-  //     clientId:"306598628041-637c2jh8kcmo7gh5p6sp76ui54hsss9l.apps.googleusercontent.com",
-  //     callback: handleCallbackResponse
-  //   })
-  //   google.accounts.id.renderButton(
-  //     document.getElementById("signInDiv"),
-  //     {theme:"outline", size:"large"}
-  //   )
-  // },[]);
 
   return (
     <div className='login-main-con'>
@@ -136,7 +101,8 @@ const LoginPage = () => {
             - Or -
           </div>
           <div className='login-bottom-btns'>
-            <button className='btn-login' onClick={loginwithGitHub}> GitHub</button>
+            {/* <button className='btn-login' onClick={GitHubBtn}> GitHub</button> */}
+            <GitHubBtn />
             <div className='login-empty'></div>
             <GoogleBtn />
           </div>
