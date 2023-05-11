@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form} from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Signup.css';
 // import background from './project-1.png';
@@ -11,26 +11,26 @@ const SignupPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [cpassword, setCpassword] = useState('');
+    const [password2, setPassword2] = useState('');
     const [role, setRole] = useState('')
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (password === cpassword) {
+        if (password === password2) {
             try {
-                const response = await fetch('/signup', {
+                const response = await fetch('/user/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email, password }),
+                    body: JSON.stringify({ email, password, password2, role, name }),
                 });
 
                 if (response.ok) {
                     const datas = await response.json();
                     // Do something with the response data, such as setting it in state
-                    data.user = email
+                    data.user = name
                     console.log(datas);
 
                     navigate("/mainpage")
@@ -46,6 +46,11 @@ const SignupPage = () => {
         }
     };
 
+    const handleSelectChange = (event) => {
+        setRole(event.target.value);
+        // console.log(event.target.value);
+      }
+
     return (
         <div className='signup-main-con'>
             <div className='signup-bg-con'></div>
@@ -55,9 +60,15 @@ const SignupPage = () => {
                     <Form onSubmit={handleSubmit} method='POST'>
                         <Form.Group controlId="formBasicRole">
                             <Form.Label id='signup-subheading'>Select Role</Form.Label>
-                            <Form.Select value={role} onChange={(e) => setRole(e.target.value)}>
+                            <Form.Select onChange={handleSelectChange}
+                            name = 'role'
+                            type = "role">
+                            {/* <select onChange={handleSelectChange}> */}
+                                <option value="">-- Select --</option>
                                 <option value="applicant">Job Applicant</option>
                                 <option value="recruiter">Job Recruiter</option>
+                            {/* </select> */}
+
                             </Form.Select>
                         </Form.Group>
 
@@ -98,10 +109,10 @@ const SignupPage = () => {
                             <Form.Label id='signup-subheading'>Confirm Password</Form.Label>
                             <Form.Control
                                 type="password"
-                                name='confirmpassword'
+                                name='password2'
                                 placeholder="Confirm Password"
-                                value={cpassword}
-                                onChange={(e) => setCpassword(e.target.value)}
+                                value={password2}
+                                onChange={(e) => setPassword2(e.target.value)}
                                 required
                             />
                         </Form.Group>

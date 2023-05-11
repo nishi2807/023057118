@@ -16,12 +16,13 @@ const MainPage = () => {
     <div className='ms-main-con'>
       <div className='ms-title-bar'>
         <h3 className='ms-title'>JobPower</h3>
+        <h3 className='ms-display-name'>{data.user}</h3>
         <GoogleLogOutBtn />
       </div>
       <div className='ms-con'>
         <div className='ms-blur-con' >
           <h2 className='ms-welcome'>Welcome :)</h2>
-          <div className='ms-display-name'>{data.user}</div>
+          {/* <div className='ms-display-name'>{data.user}</div> */}
         </div>
       </div>
     </div>
