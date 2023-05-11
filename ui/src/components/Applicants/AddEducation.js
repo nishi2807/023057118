@@ -30,17 +30,26 @@ const AddEducation = ({ onAddEducation }) => {
   // State for education details
   const [school, setSchool] = useState('');
   const [degree, setDegree] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startdate, setStartdate] = useState('');
+  const [enddate, setEnddate] = useState('');
 
   // Handle form submission
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => { 
     event.preventDefault();
-    onAddEducation({ school, degree, startDate, endDate });
+
+    const response = await fetch('/user/edit_profile/:id', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ school, degree, startdate, enddate }),
+    });
+
+    onAddEducation({ school, degree, startdate, enddate });
     setSchool('');
     setDegree('');
-    setStartDate('');
-    setEndDate('');
+    setStartdate('');
+    setEnddate('');
   };
 
   return (
@@ -52,7 +61,8 @@ const AddEducation = ({ onAddEducation }) => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              label="School"
+              label="School / University"
+              name='school'
               variant="outlined"
               fullWidth
               value={school}
@@ -63,6 +73,7 @@ const AddEducation = ({ onAddEducation }) => {
           <Grid item xs={12}>
             <TextField
               label="Degree"
+              name='degree'
               variant="outlined"
               fullWidth
               value={degree}
@@ -73,28 +84,30 @@ const AddEducation = ({ onAddEducation }) => {
           <Grid item xs={12}>
             <TextField
               label="Start Date"
+              name='startdate'
               type="date"
               variant="outlined"
               fullWidth
               InputLabelProps={{
                 shrink: true,
               }}
-              value={startDate}
-              onChange={(event) => setStartDate(event.target.value)}
+              value={startdate}
+              onChange={(event) => setStartdate(event.target.value)}
               required
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               label="End Date"
+              name='enddate'
               type="date"
               variant="outlined"
               fullWidth
               InputLabelProps={{
                 shrink: true,
               }}
-              value={endDate}
-              onChange={(event) => setEndDate(event.target.value)}
+              value={enddate}
+              onChange={(event) => setEnddate(event.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

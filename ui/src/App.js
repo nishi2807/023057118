@@ -8,6 +8,7 @@ import ResetPassword from './components/resetpassword';
 import MyApplications from './components/Applicants/MyApplication';
 import JobsList from './components/Applicants/JobsList';
 import AddEducation from './components/Applicants/AddEducation';
+import Dashboard from './components/User/Dashboard'
 import { useState } from 'react';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/MyApplications" element={<MyApplications />} />
           <Route path="/JobsList" element={<JobsList />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/AddEducation" element={<AddEducation onAddEducation={handleAddEducation} />} />
         </Routes>
       </BrowserRouter>

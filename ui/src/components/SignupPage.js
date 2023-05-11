@@ -33,7 +33,7 @@ const SignupPage = () => {
                     data.user = name
                     console.log(datas);
 
-                    navigate("/mainpage")
+                    navigate("/dashboard")
                 } else {
                     // Handle the error response from the server
                     console.error('Error:', response.statusText);

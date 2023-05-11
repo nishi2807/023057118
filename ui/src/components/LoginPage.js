@@ -52,7 +52,7 @@ const LoginPage = () => {
       console.log(datas.success)
       if (datas.success) {
         data.user = datas.email
-        navigate('/mainpage');
+        navigate('/dashoard');
       }
     } catch (err) {
       if (err.message === "Incorrect Email!" || err.message === "Incorrect Passowrd!") {

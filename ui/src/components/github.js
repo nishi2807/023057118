@@ -10,7 +10,7 @@ const GitHubBtn = () => {
   const onSuccess = (res) => {
     console.log("Login Success! Response: ", res);
     setUser(res.profileObj && res.profileObj.name);
-    navigate("/mainpage");
+    navigate("/dashboard");
   };
 
   const onFailure = (res) => {

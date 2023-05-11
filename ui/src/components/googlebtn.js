@@ -12,7 +12,7 @@ function GoogleBtn() {
 
     const onSuccess = (res) => {
         console.log("Login Scuccess! Current User : ", res.profileObj);
-        navigate("/mainpage")
+        navigate("/dashboard")
         data.user = res.profileObj.name
     }
 
