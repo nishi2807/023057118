@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --primary-color: #0466c8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main-div{
+    width: 100%;
+    height: 100%;
+
+    padding: 20px;
+}
+
+.ps-title {
+    height: 5%;
+    margin-bottom: 10px;
+    padding-left: 10px;
+
+    color: var(--primary-color);
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+
+.test{
+    width:  80%;
+    height: 200px;
+
+    background-color: aqua;
+}
+
+.job-div{
+    overflow-y: scroll;
+    width: 60%;
+    background-color: #0466c8;
+    padding: 20px;
+}
+
+.Job{
+    width: 100%;
+    height: 300px;
+    background-color: aliceblue;
+}
+
+.filter-div{
+    width: 40%;
+    background-color: aquamarine;
+}

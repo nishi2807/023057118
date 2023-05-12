@@ -10,6 +10,9 @@ import JobsList from './components/Applicants/JobsList';
 import AddEducation from './components/Applicants/AddEducation';
 import Dashboard from './components/User/Dashboard'
 import { useState } from 'react';
+import MainScreen from './components/main-screen/main-screen';
+import Profile_Screen from './components/profile-screen/profile-screen';
+import Jobs_Screen from './components/jobs-screen/jobs-screen';
 
 function App() {
   const [educationList, setEducationList] = useState([]);
@@ -31,6 +34,10 @@ function App() {
           <Route path="/JobsList" element={<JobsList />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/AddEducation" element={<AddEducation onAddEducation={handleAddEducation} />} />
+          
+          <Route path="/main-screen" element={<MainScreen />} />
+          <Route path="/profile-screen" element={<Profile_Screen />} />
+          <Route path="/Jobs-screen" element={<Jobs_Screen />} />
         </Routes>
       </BrowserRouter>
 

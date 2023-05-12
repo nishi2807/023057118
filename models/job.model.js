@@ -13,6 +13,7 @@ const jobSchema = new Schema({
     recruiterEmail: {
         type: String,
     },
+    // Job title
     title: {
         type: String,
         //required: true
