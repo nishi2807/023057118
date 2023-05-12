@@ -51,7 +51,7 @@ const LoginPage = () => {
       const datas = await response.json();
       console.log(datas.success)
       if (datas.success) {
-        data.user = datas.email
+        data.user = datas.name
         navigate('/dashoard');
       }
     } catch (err) {
