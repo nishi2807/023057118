@@ -26,6 +26,8 @@ var add_jobs = require("./Backend/routes/add_jobs");
 var get_jobs = require("./Backend/routes/get_jobs");
 var add_applied_jobs = require("./Backend/routes/add_applied_jobs");
 var get_applied_jobs = require("./Backend/routes/get_applied_jobs");
+var add_person_data = require("./Backend/routes/add_person_data");
+var get_person_data = require("./Backend/routes/get_person_data");
 
 
 app.use(cors());
@@ -51,6 +53,8 @@ app.use("/add_jobs_data",add_jobs)
 app.use("/get_jobs_data",get_jobs)
 app.use("/add_applied_jobs_data",add_applied_jobs)
 app.use("/get_applied_jobs_data",get_applied_jobs)
+app.use("/add_person_data",add_person_data)
+app.use("/get_person_data",get_person_data)
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);

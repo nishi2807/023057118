@@ -1,82 +1,76 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../profile-screen/profile-screen.css";
+import * as constants from '../../constants/constants.js';
 
 function Profile_Screen() {
-    const [personalData, setPersonalData] = useState({
-        firstName: "", // To add default data just add data in the variables
-        lastName: "",
+    const [formData, setFormData] = useState({
+        first_name: "",
+        last_name: "",
         age: "",
         gender: "",
-    });
-
-    const [contactData, setContactData] = useState({
-        mail: "", // To add default data just add data in the variables
+        mail: constants.user_data.email,
         phone_number: "",
-    });
-
-    const [educationData, setEducationData] = useState({
-        school: "", // To add default data just add data in the variables
+        school: "",
         board: "",
         university: "",
         study_field: "",
         start_date: "",
         end_date: "",
+        skills: "",
     });
 
-    const [skills, setSkills] = useState({
-        skills: "",
-    })
+    useEffect(() => {
+        fetch(`${constants.port_address}get_person_data/${constants.user_data.email}`)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            setFormData(data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, []);
 
-    const handleInputPersonalData = (event) => {
+
+    const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setPersonalData((prevFormData) => ({
+        setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value,
         }));
     };
 
-    const handlePersonalData = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(personalData);
-    };
-
-    const handleInputContactData = (event) => {
-        const { name, value } = event.target;
-        setContactData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value,
-        }));
-    };
-
-    const handleContactData = (event) => {
-        event.preventDefault();
-        console.log(contactData);
-    };
-
-    const handleInputEducationData = (event) => {
-        const { name, value } = event.target;
-        setEducationData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value,
-        }));
-    };
-
-    const handleEducationData = (event) => {
-        event.preventDefault();
-        console.log(educationData);
-    };
-
-    const handleInputSkillData = (event) => {
-        const { name, value } = event.target;
-        setSkills((prevFormData) => ({
-            ...prevFormData,
-            [name]: value,
-        }));
-    };
-
-    const handleSkillData = (event) => {
-        event.preventDefault();
-        console.log(skills);
+    
+        // Check if required fields are empty
+        const requiredFields = ['first_name', 'last_name', 'age', 'gender', 'mail', 'school', 'board', 'university', 'study_field', 'start_date', 'end_date', 'skills'];
+        const emptyFields = requiredFields.filter(field => !formData[field]);
+    
+        if (emptyFields.length > 0) {
+          alert('Please fill in all required fields!');
+          return;
+        }
+    
+        fetch(`${constants.port_address}add_person_data/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
     };
 
     return (
@@ -89,16 +83,16 @@ function Profile_Screen() {
                     <div className="divider-text">Personal Details</div>
                     <div className="divider-line2"></div>
                 </div>
-                <form onSubmit={handlePersonalData} className="personal-details-form">
+                <form className="personal-details-form">
                     <div className="form-row">
                         <div className="form-group">
                             <label htmlFor="first-name">First Name:</label>
                             <input
                                 type="text"
                                 id="first-name"
-                                name="firstName"
-                                value={personalData.firstName}
-                                onChange={handleInputPersonalData}
+                                name="first_name"
+                                value={formData.first_name}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
@@ -108,9 +102,9 @@ function Profile_Screen() {
                             <input
                                 type="text"
                                 id="last-name"
-                                name="lastName"
-                                value={personalData.lastName}
-                                onChange={handleInputPersonalData}
+                                name="last_name"
+                                value={formData.last_name}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
@@ -122,8 +116,8 @@ function Profile_Screen() {
                                 type="number"
                                 id="age"
                                 name="age"
-                                value={personalData.age}
-                                onChange={handleInputPersonalData}
+                                value={formData.age}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
@@ -133,8 +127,8 @@ function Profile_Screen() {
                             <select
                                 id="gender"
                                 name="gender"
-                                value={personalData.gender}
-                                onChange={handleInputPersonalData}
+                                value={formData.gender}
+                                onChange={handleInputChange}
                                 required
                             >
                                 <option value="">Select Gender</option>
@@ -144,153 +138,138 @@ function Profile_Screen() {
                             </select>
                         </div>
                     </div>
-                    <div className="form-btn-div" >
-                        <button type="submit">Submit</button>
+                    {/* Contact details */}
+                    <div className="divider">
+                        <div className="divider-line1"></div>
+                        <div className="divider-text">Contact Details</div>
+                        <div className="divider-line2"></div>
                     </div>
-                </form>
-                {/* Contact details */}
-                <div className="divider">
-                    <div className="divider-line1"></div>
-                    <div className="divider-text">Contact Details</div>
-                    <div className="divider-line2"></div>
-                </div>
-                <form onSubmit={handleContactData} className="personal-details-form">
                     <div className="form-row">
                         <div className="form-group">
-                            <label htmlFor="first-name">Mail:</label>
+                            <label htmlFor="mail">Mail:</label>
                             <input
                                 type="text"
                                 id="mail"
                                 name="mail"
-                                value={contactData.mail}
-                                onChange={handleInputContactData}
+                                value={formData.mail}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
                         <div className="div-gap"></div>
                         <div className="form-group">
-                            <label htmlFor="last-name">Phone Number:</label>
+                            <label htmlFor="phone-number">Phone Number:</label>
                             <input
                                 type="text"
-                                id="phone_number"
-                                name="phonenumber"
-                                value={contactData.phone_number}
-                                onChange={handleInputContactData}
+                                id="phone-number"
+                                name="phone_number"
+                                value={formData.phone_number}
+                                onChange={handleInputChange}
                             />
                         </div>
                     </div>
-                    <div className="form-btn-div" >
-                        <button type="submit">Submit</button>
+                    {/* Education details */}
+                    <div className="divider">
+                        <div className="divider-line1"></div>
+                        <div className="divider-text">Education Details</div>
+                        <div className="divider-line2"></div>
                     </div>
-                </form>
-                {/* Education details */}
-                <div className="divider">
-                    <div className="divider-line1"></div>
-                    <div className="divider-text">Education Details</div>
-                    <div className="divider-line2"></div>
-                </div>
-                <form onSubmit={handleEducationData} className="personal-details-form">
                     <div className="form-row">
                         <div className="form-group">
-                            <label htmlFor="first-name">School:</label>
+                            <label htmlFor="school">School:</label>
                             <input
                                 type="text"
                                 id="school"
                                 name="school"
-                                value={educationData.school}
-                                onChange={handleInputEducationData}
+                                value={formData.school}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
                         <div className="div-gap"></div>
                         <div className="form-group">
-                            <label htmlFor="last-name">Board:</label>
+                            <label htmlFor="board">Board:</label>
                             <input
                                 type="text"
                                 id="board"
                                 name="board"
-                                value={educationData.board}
-                                onChange={handleInputEducationData}
+                                value={formData.board}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="form-group">
-                            <label htmlFor="age">University:</label>
+                            <label htmlFor="university">University:</label>
                             <input
                                 type="text"
                                 id="university"
                                 name="university"
-                                value={educationData.university}
-                                onChange={handleInputEducationData}
+                                value={formData.university}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
                         <div className="div-gap"></div>
                         <div className="form-group">
-                            <label htmlFor="age">Field of study:</label>
+                            <label htmlFor="study-field">Field of study:</label>
                             <input
                                 type="text"
-                                id="study_field"
+                                id="study-field"
                                 name="study_field"
-                                value={educationData.study_field}
-                                onChange={handleInputEducationData}
+                                value={formData.study_field}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="form-group">
-                            <label htmlFor="start-date">Start:</label>
+                            <label htmlFor="start-date">Start Date:</label>
                             <input
                                 type="date"
-                                id="start_date"
+                                id="start-date"
                                 name="start_date"
-                                value={educationData.start_date}
-                                onChange={handleInputEducationData}
+                                value={formData.start_date}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
                         <div className="div-gap"></div>
                         <div className="form-group">
-                            <label htmlFor="end-date">End:</label>
+                            <label htmlFor="end-date">End Date:</label>
                             <input
                                 type="date"
-                                id="end_date"
+                                id="end-date"
                                 name="end_date"
-                                value={educationData.end_date}
-                                onChange={handleInputEducationData}
+                                value={formData.end_date}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
                     </div>
-                    <div className="form-btn-div" >
-                        <button type="submit">Submit</button>
+                    {/* Skills */}
+                    <div className="divider">
+                        <div className="divider-line1"></div>
+                        <div className="divider-text">Skills</div>
+                        <div className="divider-line2"></div>
                     </div>
-                </form>
-                {/* Skills details */}
-                <div className="divider">
-                    <div className="divider-line1"></div>
-                    <div className="divider-text">Skills Details</div>
-                    <div className="divider-line2"></div>
-                </div>
-                <form onSubmit={handleSkillData} className="personal-details-form">
                     <div className="form-row">
                         <div className="form-group">
-                            <label htmlFor="first-name">Skills:</label>
+                            <label htmlFor="skills">Skills:</label>
                             <input
                                 type="text"
                                 id="skills"
                                 name="skills"
-                                value={skills.skills}
-                                onChange={handleInputSkillData}
+                                value={formData.skills}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
                     </div>
                     <div className="form-btn-div" >
-                        <button type="submit">Submit</button>
+                        <button type="submit" onClick={handleSubmit}>Submit</button>
                     </div>
                 </form>
             </div>
@@ -299,3 +278,5 @@ function Profile_Screen() {
 }
 
 export default Profile_Screen;
+
+
