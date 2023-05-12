@@ -34,6 +34,9 @@ const jobs_data = new Schema({
     company:{
         type: String,
         required: true,
+    },
+    mail:{
+        type: String,
     }
 })
 

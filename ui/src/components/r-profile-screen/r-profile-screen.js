@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "../profile-screen/profile-screen.css";
+import "../r-profile-screen/r-profile-screen.css";
 import * as constants from '../../constants/constants.js';
 
-function Profile_Screen() {
+function R_Profile_Screen() {
     const [formData, setFormData] = useState({
         first_name: "",
         last_name: "",
@@ -10,17 +10,10 @@ function Profile_Screen() {
         gender: "",
         mail: constants.user_data.email,
         phone_number: "",
-        school: "",
-        board: "",
-        university: "",
-        study_field: "",
-        start_date: "",
-        end_date: "",
-        skills: "",
     });
 
     useEffect(() => {
-        fetch(`${constants.port_address}get_person_data/${constants.user_data.email}`)
+        fetch(`${constants.port_address}get_rperson_data/${constants.user_data.email}`)
           .then(response => response.json())
           .then(data => {
             if (data.length > 0) {
@@ -45,7 +38,7 @@ function Profile_Screen() {
         event.preventDefault();
     
         // Check if required fields are empty
-        const requiredFields = ['first_name', 'last_name', 'age', 'gender', 'mail', 'school', 'board', 'university', 'study_field', 'start_date', 'end_date', 'skills'];
+        const requiredFields = ['first_name', 'last_name', 'age', 'gender', 'mail'];
         const emptyFields = requiredFields.filter(field => !formData[field]);
     
         if (emptyFields.length > 0) {
@@ -53,7 +46,7 @@ function Profile_Screen() {
           return;
         }
     
-        fetch(`${constants.port_address}add_person_data/`, {
+        fetch(`${constants.port_address}add_rperson_data/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -68,7 +61,6 @@ function Profile_Screen() {
             })
             .then(data => {
                 console.log(data);
-                alert(`Updated successfully!`);
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -170,106 +162,6 @@ function Profile_Screen() {
                             />
                         </div>
                     </div>
-                    {/* Education details */}
-                    <div className="divider">
-                        <div className="divider-line1"></div>
-                        <div className="divider-text">Education Details</div>
-                        <div className="divider-line2"></div>
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label htmlFor="school">School:</label>
-                            <input
-                                type="text"
-                                id="school"
-                                name="school"
-                                value={formData.school}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div className="div-gap"></div>
-                        <div className="form-group">
-                            <label htmlFor="board">Board:</label>
-                            <input
-                                type="text"
-                                id="board"
-                                name="board"
-                                value={formData.board}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label htmlFor="university">University:</label>
-                            <input
-                                type="text"
-                                id="university"
-                                name="university"
-                                value={formData.university}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div className="div-gap"></div>
-                        <div className="form-group">
-                            <label htmlFor="study-field">Field of study:</label>
-                            <input
-                                type="text"
-                                id="study-field"
-                                name="study_field"
-                                value={formData.study_field}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label htmlFor="start-date">Start Date:</label>
-                            <input
-                                type="date"
-                                id="start-date"
-                                name="start_date"
-                                value={formData.start_date}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div className="div-gap"></div>
-                        <div className="form-group">
-                            <label htmlFor="end-date">End Date:</label>
-                            <input
-                                type="date"
-                                id="end-date"
-                                name="end_date"
-                                value={formData.end_date}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                    </div>
-                    {/* Skills */}
-                    <div className="divider">
-                        <div className="divider-line1"></div>
-                        <div className="divider-text">Skills</div>
-                        <div className="divider-line2"></div>
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label htmlFor="skills">Skills:</label>
-                            <input
-                                type="text"
-                                id="skills"
-                                name="skills"
-                                value={formData.skills}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                    </div>
                     <div className="form-btn-div" >
                         <button type="submit" onClick={handleSubmit}>Submit</button>
                     </div>
@@ -279,6 +171,6 @@ function Profile_Screen() {
     );
 }
 
-export default Profile_Screen;
+export default R_Profile_Screen;
 
 

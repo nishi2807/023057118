@@ -7,6 +7,9 @@ import GoogleLogOutBtn from "../googlelogoutbtn";
 import Jobs_Screen from "../jobs-screen/jobs-screen";
 import { user_data } from "../../constants/constants";
 import Applied_screen from "../applied-screen/applied-screen";
+import R_Profile_Screen from "../r-profile-screen/r-profile-screen";
+import R_Post_Jobs_Screen from "../r-post-jobs-screen/r-post-jobs-screen";
+import R_Post_Screen from "../r-post-screen/r-post-screen";
 
 function R_MainScreen() {
 
@@ -60,9 +63,9 @@ function R_MainScreen() {
             {/* MainScreen Div */}
             <div className="main-screen-maindiv">
                 {showPage===0 && "MainScreen"}
-                {showPage===1 && <Profile_Screen />}
-                {showPage===2 && <Jobs_Screen />}
-                {showPage===3 && <Applied_screen />}
+                {showPage===1 && <R_Profile_Screen />}
+                {showPage===2 && <R_Post_Jobs_Screen />}
+                {showPage===3 && <R_Post_Screen />}
             </div>
             {/*  */}
         </div>

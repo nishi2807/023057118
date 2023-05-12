@@ -98,7 +98,7 @@ function Jobs_Screen() {
                                     <div className="job-title">{job.job_title}</div>
                                     <div className="job-dateOfpost">{job.date_of_post}</div>
                                 </div>
-                                <div className="dis">Discription:</div>
+                                <div className="dis">Description:</div>
                                 <div className="job-discription">{job.discription}</div>
                                 <div className="job-row2">
                                     <div className="job-type" id="div-to-flex">

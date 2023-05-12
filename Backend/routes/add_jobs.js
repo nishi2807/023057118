@@ -3,7 +3,7 @@ var router = express.Router();
 
 const Jobs = require("../models/jobs");
 
-router.get('/',function(req,res){
+router.post('/',function(req,res){
 
     const new_job = new Jobs({
         job_title:req.body.job_title,
@@ -14,7 +14,7 @@ router.get('/',function(req,res){
         salary:req.body.salary,
         deadline:req.body.deadline,
         company:req.body.company,
-
+        mail:req.body.mail,
     })
 
     new_job.save().then(job => {
