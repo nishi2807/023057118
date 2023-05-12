@@ -9,6 +9,7 @@ import './Login.css'
 import GoogleBtn from './googlebtn';
 import { data } from './const';
 import GitHubBtn from './github';
+import { user_data } from '../constants/constants';
 
 // const CLIENT_ID = "3584ebcb02e8bbe0ba8b";
 const CLIENTG_ID = "244873686234-vtvor8q41b9eoe6vu3sdk3cjcer506c2.apps.googleusercontent.com"
@@ -49,10 +50,12 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       });
       const datas = await response.json();
-      console.log(datas.success)
+      console.log(datas)
       if (datas.success) {
         data.user = datas.email
-        navigate('/dashoard');
+        user_data.email=datas.email
+        user_data.name=datas.name
+        navigate('/main-screen');
       }
     } catch (err) {
       if (err.message === "Incorrect Email!" || err.message === "Incorrect Passowrd!") {

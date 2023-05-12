@@ -10,6 +10,7 @@ const validateLoginInput = require("../validations/login");
 
 // Load User model
 const User = require("../models/users.model");
+const { use } = require("passport");
 
 // GET request 
 // Getting all the users
@@ -124,7 +125,9 @@ router.post("/login", (req, res) => {
                     (err, token) => {
                         res.json({
                             success: true,
-                            token: "Bearer " + token
+                            token: "Bearer " + token,
+                            email:email,
+                            name:user.name
                         });
                     }
                 );

@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../main-screen/main-screen.css'
 import Profile_Screen from "../profile-screen/profile-screen";
 import LoginPage from "../LoginPage";
 import Dashboard from "../User/Dashboard";
 import GoogleLogOutBtn from "../googlelogoutbtn";
 import Jobs_Screen from "../jobs-screen/jobs-screen";
+import { user_data } from "../../constants/constants";
+import Applied_screen from "../applied-screen/applied-screen";
 
 function MainScreen() {
 
     const [menubtn_click, setMenubtn_click] = useState(false);
-    const [name, setName] = useState("Arnav Pandey");
-    const [showPage, setShowPage] = useState(2);
+    const [name, setName] = useState(":[");
+    const [showPage, setShowPage] = useState(3);
+
+    useEffect(() => {setName(user_data.name)},[]);
 
     return (
         <div className="main-screen-div">
@@ -58,7 +62,7 @@ function MainScreen() {
                 {showPage===0 && "MainScreen"}
                 {showPage===1 && <Profile_Screen />}
                 {showPage===2 && <Jobs_Screen />}
-                {showPage===3 && "AppliedScreen"}
+                {showPage===3 && <Applied_screen />}
             </div>
             {/*  */}
         </div>

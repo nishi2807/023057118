@@ -20,6 +20,13 @@ var testAPIRouter = require("./routes/testAPI");
 var UserRouter = require("./routes/users.routes");
 var JobRouter = require("./routes/job.routes");
 var ApplicationRouter = require("./routes/application.routes");
+// ------------
+// Routes by AP
+var add_jobs = require("./Backend/routes/add_jobs");
+var get_jobs = require("./Backend/routes/get_jobs");
+var add_applied_jobs = require("./Backend/routes/add_applied_jobs");
+var get_applied_jobs = require("./Backend/routes/get_applied_jobs");
+
 
 app.use(cors());
 // Body-Parser Middleware
@@ -39,6 +46,11 @@ app.use("/testAPI", testAPIRouter);
 app.use("/user", UserRouter);
 app.use("/job", JobRouter);
 app.use("/application", ApplicationRouter);
+// ------------
+app.use("/add_jobs_data",add_jobs)
+app.use("/get_jobs_data",get_jobs)
+app.use("/add_applied_jobs_data",add_applied_jobs)
+app.use("/get_applied_jobs_data",get_applied_jobs)
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);

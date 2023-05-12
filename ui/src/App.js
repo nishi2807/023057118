@@ -13,6 +13,7 @@ import { useState } from 'react';
 import MainScreen from './components/main-screen/main-screen';
 import Profile_Screen from './components/profile-screen/profile-screen';
 import Jobs_Screen from './components/jobs-screen/jobs-screen';
+import Applied_screen from './components/applied-screen/applied-screen';
 
 function App() {
   const [educationList, setEducationList] = useState([]);
@@ -37,7 +38,8 @@ function App() {
           
           <Route path="/main-screen" element={<MainScreen />} />
           <Route path="/profile-screen" element={<Profile_Screen />} />
-          <Route path="/Jobs-screen" element={<Jobs_Screen />} />
+          <Route path="/jobs-screen" element={<Jobs_Screen />} />
+          <Route path="/applied-screen" element={<Applied_screen />} />
         </Routes>
       </BrowserRouter>
 
