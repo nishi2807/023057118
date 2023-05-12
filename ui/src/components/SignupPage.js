@@ -5,6 +5,7 @@ import './Signup.css';
 // import background from './project-1.png';
 import { useNavigate } from 'react-router-dom';
 import { data } from './const';
+import { user_data } from '../constants/constants';
 
 const SignupPage = () => {
     const navigate = useNavigate()
@@ -31,9 +32,14 @@ const SignupPage = () => {
                     const datas = await response.json();
                     // Do something with the response data, such as setting it in state
                     data.user = name
-                    console.log(datas);
+                    user_data.email = datas.email
+                    user_data.name = datas.name
+                    user_data.role = datas.role
 
-                    navigate("/dashboard")
+                    if(datas.role !== "recruiter"){
+                        navigate('/main-screen');
+                      }else{navigate('/r-main-screen')}
+                    console.log(datas);
                 } else {
                     // Handle the error response from the server
                     console.error('Error:', response.statusText);

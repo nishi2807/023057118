@@ -30,7 +30,7 @@
 .floating-div {
     width: 100%;
     height: 92%;
-    padding: 20px 10px;
+    padding: 0 10px;
 
     background-color: white;
     border-radius: 10px;
@@ -42,24 +42,26 @@
 .divider {
     display: flex;
     align-items: center;
+    margin-top: 60px;
+    margin-bottom: 10px;
 }
 
 .divider-line1 {
     width: 20px;
     height: 1px;
-    background-color: lightgray;
+    background-color: rgb(4, 102, 200, 0.3);
 }
 
 .divider-line2 {
     flex-grow: 1;
     height: 1px;
-    background-color: lightgray;
+    background-color: rgb(4, 102, 200, 0.3);
 }
 
 .divider-text {
     padding: 0 10px;
     font-weight: bold;
-    color: gray;
+    color: rgb(4, 102, 200, 0.8);
 }
 
 /* Form */
@@ -87,7 +89,7 @@ label {
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
-    color: gray;
+    color: rgb(4, 102, 200, 0.9);
 }
 
 input[type="text"],
@@ -97,7 +99,7 @@ select {
     width: 100%;
     padding: 5px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(4, 102, 200, 0.3);
     
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
