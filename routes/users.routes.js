@@ -3,10 +3,19 @@ var router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
+const nodemailer = require("nodemailer");
 
 // Load input validation
 const validateRegisterInput = require("../validations/register");
 const validateLoginInput = require("../validations/login");
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "jobpower14@gmail.com",
+        pass: "arnavpallavinishi"
+    }
+})
 
 // Load User model
 const User = require("../models/users.model");
@@ -14,22 +23,22 @@ const { use } = require("passport");
 
 // GET request 
 // Getting all the users
-router.get("/", function(req, res) {
-    User.find(function(err, users) {
-		if (err) {
-			console.log(err);
-		} else {
-			res.json(users);
-		}
-	})
+router.get("/", function (req, res) {
+    User.find(function (err, users) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(users);
+        }
+    })
 });
 
 // Getting one user
-router.get("/:id", function(req, res) {
-    User.findById(req.params.id).then(user => 
+router.get("/:id", function (req, res) {
+    User.findById(req.params.id).then(user =>
         res.json(user)
     )
-    .catch(err => console.log(err));
+        .catch(err => console.log(err));
 });
 
 // POST request 
@@ -44,30 +53,30 @@ router.post("/signup", (req, res) => {
     }
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
-        return res.status(400).json({ email: "Email already exists" });
+            return res.status(400).json({ email: "Email already exists" });
         } else {
-        const newUser = new User({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            role: req.body.role,
-        });
-        
-        // Hash password before saving in database
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-                .save()
-                .then(user => {
-                    res.status(200).json(user);
-                })
-                .catch(err => {
-                    res.status(400).send(err);
+            const newUser = new User({
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+                role: req.body.role,
+            });
+
+            // Hash password before saving in database
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if (err) throw err;
+                    newUser.password = hash;
+                    newUser
+                        .save()
+                        .then(user => {
+                            res.status(200).json(user);
+                        })
+                        .catch(err => {
+                            res.status(400).send(err);
+                        });
                 });
             });
-        });
         }
     });
 });
@@ -76,15 +85,15 @@ router.post("/signup", (req, res) => {
 // Edit User Details
 router.route('/edit_profile/:id').put((req, res, next) => {
     User.findByIdAndUpdate(req.params.id, {
-      $set: req.body
+        $set: req.body
     }, (error, data) => {
-      if (error) {
-        console.log(error)
-        return next(error);
-      } else {
-        res.json(data)
-        console.log('Student updated successfully !')
-      }
+        if (error) {
+            console.log(error)
+            return next(error);
+        } else {
+            res.json(data)
+            console.log('Student updated successfully !')
+        }
     })
 })
 
@@ -134,36 +143,74 @@ router.post("/login", (req, res) => {
                 );
             } else {
                 return res
-                .status(400)
-                .json({ passwordincorrect: " Password incorrect" });
+                    .status(400)
+                    .json({ passwordincorrect: " Password incorrect" });
             }
         });
     });
 });
 
-// router.post("/login", (req, res) => {
-// 	const email = req.body.email;
-// 	// Find user by email
-// 	User.findOne({ email }).then(user => {
-// 		// Check if user email exists
-// 		if (!user) {
-// 			return res.status(404).json({
-// 				error: "Email not found",
-// 			});
-//         }
-//         else {
-//             res.send("Email Found");
-//             return user;
-//         }
-// 	});
-// });
+router.post("/sendpasswordLink", async (req, res) => {
+    const email = req.body.email;
+    // console.log(req.body)
 
-router.delete('/del_user/:id', (req,res) => {
-    User.findById(req.params.id).then(user => 
-        user.remove().then(() => res.json({success: true}))
-    )
-    .catch(err => res.status(404).json({success: false}));
+    if (!email) {
+        return res.status(401).json({ status: 401, message: "Enter your email" })
+    }
+    try {
+        const userFind = await User.findOne({ email: email });
+        console.log("userfind", userFind)
+
+        //token for reset password
+        const token = jwt.sign({_id:userFind._id}, keys.secretOrKey,{
+            expiresIn: "120s"
+        });
+        console.log("token", token)
+
+        const mailoptions = {
+            from:"jobpower14@gmail.com",
+            to:email,
+            subject: "Password Reset",
+            text:'This link is valid for 2 minutes http://localhost:3000/resetpassword/${userFind._id}/:token'
+        }
+
+        transporter.sendMail(mailoptions, (error, info) => {
+            if(error){
+                console.log("Error", error);
+                res.status(401).json({status:401, message:"email not send"})
+            }else{
+                console.log("Email sent", info.response);
+                res.status(201).json({status:201, message:"Email sent Successfully"})
+            }
+        })
+    } catch (error) {
+        res.status(401).json({status:401, message:"Invalid User"})
+    }
+
 });
+
+router.delete('/del_user/:id', (req, res) => {
+    User.findById(req.params.id).then(user =>
+        user.remove().then(() => res.json({ success: true }))
+    )
+        .catch(err => res.status(404).json({ success: false }));
+});
+
+//send Email link for reset password
+// router.post('/sendpasswordLink', async (res, req) => {
+//     const email = req.body;
+//     console.log(req.body)
+
+//     if (!email){
+//         return res.status(401).json({status:401, message: "Enter your email"})
+//     }
+//     try {
+//         const userFind = await User.findOne({email:email});
+//         console.log("userfind", userFind)
+//     } catch (error) {
+
+//     }
+// });
 
 module.exports = router;
 
