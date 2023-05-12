@@ -3,10 +3,10 @@ var router = express.Router();
 
 const AppliedJobs = require("../models/person_data");
 
-router.get('/:mail', function(req, res) {
+router.get('/:email', function(req, res) {
   const email = req.params.email;
 
-  AppliedJobs.find({ mail: mail }, function(err, appliedjobs) {
+  AppliedJobs.find({ mail: email }, function(err, appliedjobs) {
     if (err) {
       console.log(err);
       res.status(500).send('Error fetching jobs');

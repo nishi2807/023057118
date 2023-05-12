@@ -23,8 +23,8 @@ function Profile_Screen() {
         fetch(`${constants.port_address}get_person_data/${constants.user_data.email}`)
           .then(response => response.json())
           .then(data => {
-            console.log(data)
-            setFormData(data);
+            // console.log(data)
+            setFormData(data[0]);
           })
           .catch(error => {
             console.log(error);

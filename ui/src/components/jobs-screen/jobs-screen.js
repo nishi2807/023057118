@@ -14,7 +14,7 @@ function Jobs_Screen() {
         const fetchJobsData = async () => {
             const response = await fetch(`${constants.port_address}get_jobs_data/`);
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
             setJobsData(data);
         };
         fetchJobsData();
