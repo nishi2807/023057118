@@ -55,7 +55,12 @@ const LoginPage = () => {
         data.user = datas.email
         user_data.email=datas.email
         user_data.name=datas.name
-        navigate('/main-screen');
+        user_data.role=datas.role
+        console.log(datas)
+
+        if(datas.role !== "recruiter"){
+          navigate('/main-screen');
+        }else{navigate('/r-main-screen')}
       }
     } catch (err) {
       if (err.message === "Incorrect Email!" || err.message === "Incorrect Passowrd!") {

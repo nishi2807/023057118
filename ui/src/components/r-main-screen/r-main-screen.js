@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import '../main-screen/main-screen.css'
+import '../r-main-screen/r-main-screen.css'
 import Profile_Screen from "../profile-screen/profile-screen";
 import LoginPage from "../LoginPage";
 import Dashboard from "../User/Dashboard";
@@ -8,7 +8,7 @@ import Jobs_Screen from "../jobs-screen/jobs-screen";
 import { user_data } from "../../constants/constants";
 import Applied_screen from "../applied-screen/applied-screen";
 
-function MainScreen() {
+function R_MainScreen() {
 
     const [menubtn_click, setMenubtn_click] = useState(false);
     const [name, setName] = useState(":[");
@@ -43,8 +43,8 @@ function MainScreen() {
                     <div>
                         <br /><br />
                         <div className="menu-item" onClick={() => {setShowPage(1)}}>Profile</div>
-                        <div className="menu-item" onClick={() => {setShowPage(2)}}>Jobs</div>
-                        <div className="menu-item" onClick={() => {setShowPage(3)}}>Applied</div>
+                        <div className="menu-item" onClick={() => {setShowPage(2)}}>Post Jobs</div>
+                        <div className="menu-item" onClick={() => {setShowPage(3)}}>Jobs Posted</div>
                     </div>
 
                     <div>
@@ -69,4 +69,4 @@ function MainScreen() {
     )
 }
 
-export default MainScreen;
+export default R_MainScreen;

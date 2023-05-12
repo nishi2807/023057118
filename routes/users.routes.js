@@ -127,7 +127,8 @@ router.post("/login", (req, res) => {
                             success: true,
                             token: "Bearer " + token,
                             email:email,
-                            name:user.name
+                            name:user.name,
+                            role:user.role
                         });
                     }
                 );

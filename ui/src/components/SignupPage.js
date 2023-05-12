@@ -34,9 +34,12 @@ const SignupPage = () => {
                     data.user = name
                     user_data.email = datas.email
                     user_data.name = datas.name
-                    console.log(datas);
+                    user_data.role = datas.role
 
-                    navigate("/main-screen")
+                    if(datas.role !== "recruiter"){
+                        navigate('/main-screen');
+                      }else{navigate('/r-main-screen')}
+                    console.log(datas);
                 } else {
                     // Handle the error response from the server
                     console.error('Error:', response.statusText);
