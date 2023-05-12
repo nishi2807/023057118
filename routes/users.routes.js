@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: "jobpower14@gmail.com",
-        pass: "arnavpallavinishi"
+        pass: "xcsdbolaiymfadra"
     }
 })
 
@@ -135,9 +135,9 @@ router.post("/login", (req, res) => {
                         res.json({
                             success: true,
                             token: "Bearer " + token,
-                            email:email,
-                            name:user.name,
-                            role:user.role
+                            email: email,
+                            name: user.name,
+                            role: user.role
                         });
                     }
                 );
@@ -150,6 +150,7 @@ router.post("/login", (req, res) => {
     });
 });
 
+// Sending Link for reset password
 router.post("/sendpasswordLink", async (req, res) => {
     const email = req.body.email;
     // console.log(req.body)
@@ -162,32 +163,82 @@ router.post("/sendpasswordLink", async (req, res) => {
         console.log("userfind", userFind)
 
         //token for reset password
-        const token = jwt.sign({_id:userFind._id}, keys.secretOrKey,{
+        const token = jwt.sign({ _id: userFind._id }, keys.secretOrKey, {
             expiresIn: "120s"
         });
-        console.log("token", token)
+        // console.log("token", token)
 
         const mailoptions = {
-            from:"jobpower14@gmail.com",
-            to:email,
+            from: "jobpower14@gmail.com",
+            to: email,
             subject: "Password Reset",
-            text:'This link is valid for 2 minutes http://localhost:3000/resetpassword/${userFind._id}/:token'
+            text: `This link is valid for 2 minutes http://localhost:3000/resetpassword/${userFind._id}/${token}`
         }
 
         transporter.sendMail(mailoptions, (error, info) => {
-            if(error){
+            if (error) {
                 console.log("Error", error);
-                res.status(401).json({status:401, message:"email not send"})
-            }else{
+                res.status(401).json({ status: 401, message: "email not send" })
+            } else {
                 console.log("Email sent", info.response);
-                res.status(201).json({status:201, message:"Email sent Successfully"})
+                res.status(201).json({ status: 201, message: "Email sent Successfully" })
             }
         })
     } catch (error) {
-        res.status(401).json({status:401, message:"Invalid User"})
+        res.status(401).json({ status: 401, message: "Invalid User" })
     }
 
 });
+
+// verify user for forgot password time
+// router.get("/resetpassword/:id/:token", async (req, res) => {
+//     const { id, token } = req.params;
+
+//     try {
+//         const verifyToken = jwt.verify(token, keysecret);
+//         console.log(verifyToken)
+
+//         const validuser = await User.findOne({ _id: id });
+
+//         console.log(verifyToken)
+
+//         if (validuser && verifyToken._id) {
+//             res.status(201).json({ status: 201, validuser })
+//         } else {
+//             res.status(401).json({ status: 401, message: "user not exist" })
+//         }
+
+//     } catch (error) {
+//         res.status(401).json({ status: 401, error })
+//     }
+// });
+
+// Updating password
+router.post("/:id/:token", async (req, res) => {
+    const { id, token } = req.params;
+    const { password } = req.body;
+    console.log(password)
+
+    try {
+        const validuser = await User.findOne({ _id: id});
+
+        // const verifyToken = jwt.verify(token, keysecret);
+
+        if (validuser) {
+            const newpassword = await bcrypt.hash(password, 12);
+
+            const setnewuserpass = await User.findByIdAndUpdate({ _id: id }, { password: newpassword });
+
+            setnewuserpass.save();
+            res.status(201).json({ status: 201, setnewuserpass })
+
+        } else {
+            res.status(401).json({ status: 401, message: "user does not exist" })
+        }
+    } catch (error) {
+        res.status(401).json({ status: 401, error })
+    }
+})
 
 router.delete('/del_user/:id', (req, res) => {
     User.findById(req.params.id).then(user =>
