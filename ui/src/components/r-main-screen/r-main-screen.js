@@ -62,7 +62,16 @@ function R_MainScreen() {
             {/*  */}
             {/* MainScreen Div */}
             <div className="main-screen-maindiv">
-                {showPage===0 && "MainScreen"}
+                {showPage===0 && 
+                <div className="rms-image-div">
+                <div className="title-rms-div">
+                    <div className="rtop-title">Welcome to</div>
+                    <div className="rmain-title">JobPower</div>
+                </div>
+                <div className="rms-image"></div>
+                <p className="rms-p">Find the perfect candidates for your job openings with our powerful job posting platform. Attract top talent and build your dream team today.</p>
+            </div>
+                }
                 {showPage===1 && <R_Profile_Screen />}
                 {showPage===2 && <R_Post_Jobs_Screen />}
                 {showPage===3 && <R_Post_Screen />}

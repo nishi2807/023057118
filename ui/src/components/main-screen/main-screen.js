@@ -14,7 +14,7 @@ function MainScreen() {
     const [name, setName] = useState(":[");
     const [showPage, setShowPage] = useState(0);
 
-    useEffect(() => {setName(user_data.name)},[]);
+    useEffect(() => { setName(user_data.name) }, []);
 
     return (
         <div className="main-screen-div">
@@ -42,9 +42,9 @@ function MainScreen() {
                 <div className="main-screen-menu">
                     <div>
                         <br /><br />
-                        <div className="menu-item" onClick={() => {setShowPage(1)}}>Profile</div>
-                        <div className="menu-item" onClick={() => {setShowPage(2)}}>Jobs</div>
-                        <div className="menu-item" onClick={() => {setShowPage(3)}}>Applied</div>
+                        <div className="menu-item" onClick={() => { setShowPage(1) }}>Profile</div>
+                        <div className="menu-item" onClick={() => { setShowPage(2) }}>Jobs</div>
+                        <div className="menu-item" onClick={() => { setShowPage(3) }}>Applied</div>
                     </div>
 
                     <div>
@@ -59,10 +59,19 @@ function MainScreen() {
             {/*  */}
             {/* MainScreen Div */}
             <div className="main-screen-maindiv">
-                {showPage===0 && "MainScreen"}
-                {showPage===1 && <Profile_Screen />}
-                {showPage===2 && <Jobs_Screen />}
-                {showPage===3 && <Applied_screen />}
+                {showPage === 0 &&
+                    <div className="ms-image-div">
+                        <div className="title-ms-div">
+                            <div className="top-title">Welcome to</div>
+                            <div className="main-title">JobPower</div>
+                        </div>
+                        <div className="ms-image"></div>
+                        <p className="ms-p">Discover your dream job and take the next step in your career with our job search platform.</p>
+                    </div>
+                }
+                {showPage === 1 && <Profile_Screen />}
+                {showPage === 2 && <Jobs_Screen />}
+                {showPage === 3 && <Applied_screen />}
             </div>
             {/*  */}
         </div>

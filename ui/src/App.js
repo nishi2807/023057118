@@ -16,6 +16,7 @@ import Jobs_Screen from './components/jobs-screen/jobs-screen';
 import Applied_screen from './components/applied-screen/applied-screen';
 import R_MainScreen from './components/r-main-screen/r-main-screen';
 import R_Profile_Screen from './components/r-profile-screen/r-profile-screen';
+import First_Google_user from './components/firstgoogle-user/firstgoogle-user';
 
 function App() {
   const [educationList, setEducationList] = useState([]);
@@ -44,6 +45,7 @@ function App() {
           <Route path="/r-profile-screen" element={<R_Profile_Screen />} />
           <Route path="/jobs-screen" element={<Jobs_Screen />} />
           <Route path="/applied-screen" element={<Applied_screen />} />
+          <Route path="/google_user" element={<First_Google_user />} />
         </Routes>
       </BrowserRouter>
 

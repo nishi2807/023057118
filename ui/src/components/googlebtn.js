@@ -3,19 +3,70 @@ import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
 import { gapi } from 'gapi-script';
 import { data } from './const';
-import { user_data } from '../constants/constants';
+import { port_address, user_data } from '../constants/constants';
+import { useState } from 'react';
+import { set } from 'mongoose';
 
 const clientgId = "244873686234-vtvor8q41b9eoe6vu3sdk3cjcer506c2.apps.googleusercontent.com"
 
 
 function GoogleBtn() {
     const navigate = useNavigate();
+    const [message, setMessage] = useState('');
+    const [role, setRole] = useState('')
 
-    const onSuccess = (res) => {
+    const onSuccess = async (res) => {
         console.log("Login Scuccess! Current User : ", res.profileObj);
         user_data.name = res.profileObj.name
         user_data.email = res.profileObj.email
-        navigate("/main-screen")
+
+        await fetch(`${port_address}check_user/${res.profileObj.email}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+          })
+            .then((response) => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Error checking user');
+              }
+            })
+            .then((data) => {
+                // setMessage(data)
+                // if(data !== false){
+                //     setRole(data.role)
+                //     console.log(data.role)
+                // }
+
+                if(data !== false){
+                    if(data.role == "applicant"){
+                        navigate("/main-screen")
+                    }else{
+                        navigate("/r-main-screen")
+                    }
+                }else{
+                    navigate("/google_user")
+                }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+
+        // console.log(message)
+        
+        // if(message !== false){
+        //     console.log(data.role)
+        //     if(role == "applicant"){
+        //         navigate("/r-main-screen")
+        //     }else{
+        //         navigate("/main-screen")
+        //     }
+
+        // }else{
+        //     navigate("/google_user")
+        // }
+
+        
     }
 
     const onFailure = (res) => {
