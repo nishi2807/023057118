@@ -148,3 +148,44 @@
     align-items: center;
     justify-content: center;
 }
+
+
+.rms-image-div{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.rtop-title, .rmain-title{
+    font-family: 'Roboto', sans-serif;
+}
+
+.rmain-title{
+    font-size: 52px;
+    font-weight: 800;
+}
+
+.title-rms-div{
+    /* background-color: #0466c8; */
+}
+
+.rms-image{
+    height: 50%;
+    width: 50%;
+
+    background-image: url('../../../images/v1.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.rms-p{
+    color: gray;
+    max-width: 600px;
+  display: inline-block;
+  text-align: center;
+}
