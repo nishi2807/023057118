@@ -33,6 +33,7 @@
     height: 94%;
 
     padding: 10px;
+    overflow-y: scroll;
     /* background-color: aqua; */
 }
 
@@ -97,3 +98,12 @@
 #job-filter {
     width: 20%;
 } */
+
+.ar-btn{
+    border: none;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+}

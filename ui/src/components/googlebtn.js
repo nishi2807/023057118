@@ -32,12 +32,6 @@ function GoogleBtn() {
               }
             })
             .then((data) => {
-                // setMessage(data)
-                // if(data !== false){
-                //     setRole(data.role)
-                //     console.log(data.role)
-                // }
-
                 if(data !== false){
                     if(data.role == "applicant"){
                         navigate("/main-screen")
@@ -51,22 +45,6 @@ function GoogleBtn() {
             .catch((error) => {
               console.log(error);
             });
-
-        // console.log(message)
-        
-        // if(message !== false){
-        //     console.log(data.role)
-        //     if(role == "applicant"){
-        //         navigate("/r-main-screen")
-        //     }else{
-        //         navigate("/main-screen")
-        //     }
-
-        // }else{
-        //     navigate("/google_user")
-        // }
-
-        
     }
 
     const onFailure = (res) => {

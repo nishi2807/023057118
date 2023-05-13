@@ -33,6 +33,7 @@ var get_rperson_data = require("./Backend/routes/get_r_person_data");
 var get_posted_jobs = require("./Backend/routes/get_posted_jobs");
 var check_user = require("./Backend/routes/check_user");
 var add_user = require("./Backend/routes/add_user");
+var all_applicants = require("./Backend/routes/get_all_applied_jobs");
 
 
 
@@ -66,6 +67,7 @@ app.use("/get_rperson_data",get_rperson_data)
 app.use("/get_posted_jobs",get_posted_jobs)
 app.use("/add_user",add_user)
 app.use("/check_user",check_user)
+app.use("/all_applicants",all_applicants)
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);

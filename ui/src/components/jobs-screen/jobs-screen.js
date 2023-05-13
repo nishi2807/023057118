@@ -81,8 +81,18 @@ function Jobs_Screen() {
         ) {
             return false;
         }
+        if (
+            selectedStartDate &&
+            selectedEndDate &&
+            (Date.parse(job.date_of_post) < Date.parse(selectedStartDate) ||
+                Date.parse(job.date_of_post) > Date.parse(selectedEndDate))
+        ) {
+            return false;
+        }
         return true;
     });
+
+    const companyNames = Array.from(new Set(jobsData.map(job => job.company)));
 
     return (
         <div className="main-div">
@@ -169,16 +179,13 @@ function Jobs_Screen() {
                         onChange={(e) => setSelectedCompany(e.target.value)}
                     >
                         <option value="">All companies</option>
-                        {jobsData.map((job) => (
-                            <option
-                                key={`${job._id}`}
-                                value={job.company}
-                            >
-                                {job.company}
+                        {companyNames.map((companyName) => (
+                            <option key={companyName} value={companyName}>
+                                {companyName}
                             </option>
                         ))}
                     </select>
-                    <label htmlFor="job-date-filter">Filter by date of posting:</label>
+                    {/* <label htmlFor="job-date-filter">Filter by date of posting:</label>
                     <div style={{ display: "flex" }}>
                         <input
                             type="date"
@@ -193,7 +200,7 @@ function Jobs_Screen() {
                             value={selectedEndDate}
                             onChange={(e) => setSelectedEndDate(e.target.value)}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
