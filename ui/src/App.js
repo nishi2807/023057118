@@ -1,4 +1,5 @@
 import LoginPage from './components/LoginPage';
+import FrontPage from './components/FrontPage';
 import SignupPage from './components/SignupPage';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Switch, Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
@@ -28,7 +29,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<FrontPage />} />
+          <Route path='/login' element={<LoginPage/>} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/mainpage" element={<MainPage />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
