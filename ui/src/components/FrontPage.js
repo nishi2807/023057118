@@ -28,16 +28,16 @@ const FrontPage = () => {
         <div className='signup-main-con'>
             <div className='signup-bg-con'></div>
             <div className='signup-con'>
-                <div className='signup-blur-container' style={{padding:"15%"}}>
+                <div className='signup-blur-container' style={{padding:"8%"}}>
                         <img src={download}></img>
                     <h2 className='signup-subtitle'>Welcome to Job Power!</h2>
                     <p className='slogan'>Find your dream job, today and tomorrow.
                         Join our site, and let your career grow!</p>
-                    <button className='signup-btn' style={{ marginTop: '8%' }} onClick={login}>Login</button>
+                    <button className='signup-btn' style={{padding:'8px'}} onClick={login}>Login</button>
                     <div className='signup-bottom'>
                         - Or -
                     </div>
-                    <button className='signup-btn' onClick={signup}>Sign Up</button>
+                    <button className='signup-btn' onClick={signup} style={{padding:'8px'}}>Sign Up</button>
                 </div>
             </div>
         </div>

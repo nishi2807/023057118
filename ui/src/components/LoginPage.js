@@ -103,7 +103,7 @@ const LoginPage = () => {
             <div className='login-fp'><Link to="/forgotpassword">Forgot Password?</Link></div>
           </Form>
           <div className='login-btm'>
-            <button type="submit" className='login-butn' onClick={handleSubmit}> Login</button>
+            <button className='login-butn' onClick={handleSubmit}> Login</button>
           </div>
           <div className='login-bottom'>
             - Or -
