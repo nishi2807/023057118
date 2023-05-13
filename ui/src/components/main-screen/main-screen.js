@@ -12,7 +12,7 @@ function MainScreen() {
 
     const [menubtn_click, setMenubtn_click] = useState(false);
     const [name, setName] = useState(":[");
-    const [showPage, setShowPage] = useState(0);
+    const [showPage, setShowPage] = useState(2);
 
     useEffect(() => {setName(user_data.name)},[]);
 
