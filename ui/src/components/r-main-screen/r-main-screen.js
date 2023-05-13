@@ -10,6 +10,7 @@ import Applied_screen from "../applied-screen/applied-screen";
 import R_Profile_Screen from "../r-profile-screen/r-profile-screen";
 import R_Post_Jobs_Screen from "../r-post-jobs-screen/r-post-jobs-screen";
 import R_Post_Screen from "../r-post-screen/r-post-screen";
+import No_of_Applicants from "../no_applications/no_of_applications";
 
 function R_MainScreen() {
 
@@ -48,6 +49,7 @@ function R_MainScreen() {
                         <div className="menu-item" onClick={() => {setShowPage(1)}}>Profile</div>
                         <div className="menu-item" onClick={() => {setShowPage(2)}}>Post Jobs</div>
                         <div className="menu-item" onClick={() => {setShowPage(3)}}>Jobs Posted</div>
+                        <div className="menu-item" onClick={() => {setShowPage(4)}}>Applicants</div>
                     </div>
 
                     <div>
@@ -75,6 +77,7 @@ function R_MainScreen() {
                 {showPage===1 && <R_Profile_Screen />}
                 {showPage===2 && <R_Post_Jobs_Screen />}
                 {showPage===3 && <R_Post_Screen />}
+                {showPage===4 && <No_of_Applicants />}
             </div>
             {/*  */}
         </div>
